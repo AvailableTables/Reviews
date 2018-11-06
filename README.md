@@ -1,3 +1,6 @@
+Legacy App: https://github.com/hrnyc18-tableOpen/Reviews
+
+
 # Project Name
 
 > This project is a self-contained reviews component for TableOpen, a replica of Open Table's restaurant web page.
