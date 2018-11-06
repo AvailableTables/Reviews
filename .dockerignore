@@ -1,0 +1,8 @@
+config.js
+client/dist/bundle.js
+client/src
+db/reviewsSchema.sql
+db/dummyData.js
+db/buildReviewsData.js
+db/buildRestaurantData.js
+db/buildUserData.js
