@@ -11,7 +11,8 @@
   "scripts": {
     "react-dev": "webpack -d --env.SC_ATTR=reviews --watch",
     "server-dev": "nodemon server/index.js",
-    "seed": "mysql -u root -p < ./db/reviewsSchema.sql && node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js",
+    "seed": "mysql -u root < ./db/reviewsSchema.sql && node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js",
+    "pgseed": "psql -U  postgres -f ./db/pg/testsch.sql",
     "test": "jest ./spec/test.js",
     "seed-aws": "mysql -h tableopen-reviews-db-free.ctqqauvpyeqz.us-east-1.rds.amazonaws.com -P 3306 -u mjones61692 -p < ./db/reviewsSchema.sql && node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js"
   },
@@ -38,12 +39,15 @@
     "bluebird": "^3.5.2",
     "body-parser": "^1.17.2",
     "compression": "^1.7.3",
+    "csv-write-stream": "^2.0.0",
     "express": "^4.15.0",
     "jest": "^23.6.0",
     "mysql": "^2.15.0",
+    "pg": "^7.6.1",
     "puppeteer": "^1.9.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "sequelize": "^4.41.1",
     "styled-components": "^4.0.2"
   }
 }

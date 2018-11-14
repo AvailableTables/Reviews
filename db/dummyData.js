@@ -99,7 +99,7 @@ const cities = ['New York',
   'Boise',
   'San Bernardino'];
 
-firstNames = ['Rutherford',
+const firstNames = ['Rutherford',
   'Elfrida',
   'Reeva',
   'Gino',
@@ -200,7 +200,7 @@ firstNames = ['Rutherford',
   'Marti',
   'Michele'];
 
-lastNames = ['Q',
+const lastNames = ['Q',
   'W',
   'E',
   'R',
@@ -253,6 +253,7 @@ const recommendedForMaker = () => {
   return recommends.join(',');
 };
 
+const randomizer = (max) => Math.ceil(Math.random() * max)
 // Review Text
 
 const who = ['I', 'My family', 'My girfriend', 'My friends', 'We', 'Everyone', 'My boyfriend', 'My children', 'My wife', 'My husband', 'Everybody', 'We all'];
@@ -273,20 +274,20 @@ const randomDate = (start, end) => {
 const reviewTextMaker = () => {
   return `${randomize(who)} ${randomize(opinion)} ${randomize(place)}${randomize(punctuation)} ${randomize(pronoun)} ${randomize(adjective)} was the ${randomize(food)}${randomize(punctuation)} ${randomize(who)} ${randomize(what)} ${randomize(eatAgain)} ${randomize(when)}${randomize(punctuation)}`;
 };
-
+//noiseLevel  isRecommended; recommendFor
 exports.reviewDataMaker = () => {
   return {
-    overallRating: Math.ceil(Math.random() * 5),
-    foodRating: Math.ceil(Math.random() * 5),
-    serviceRating: Math.ceil(Math.random() * 5),
-    ambienceRating: Math.ceil(Math.random() * 5),
-    valueRating: Math.ceil(Math.random() * 5),
-    noiseLevel: randomize([undefined, 1, 2, 3]),
-    isRecommended: randomize([undefined, 0, 1]),
+    overallRating: randomizer(5),
+    foodRating: randomizer(5),
+    serviceRating: randomizer(5),
+    ambienceRating: randomizer(5),
+    valueRating: randomizer(5),
+    noiseLevel: randomize([1, 2, 3]),
+    isRecommended: randomize([0, 1]),
     reviewText: reviewTextMaker(),
     dinedDate: randomDate(new Date(2010, 0, 1), new Date()).valueOf(),
-    restaurantId: Math.ceil(Math.random() * 100),
-    userId: Math.ceil(Math.random() * 100),
+    restaurantId: randomizer(10000000),
+    userId: randomizer(1000000),
     recommendedFor: recommendedForMaker()
   };
 };
@@ -333,8 +334,11 @@ const lovedForMaker = () => {
     for (let i = 0; i < num; i++) {
       loved.push(randomize(lovedForList));
     }
+    return loved.join(',');
+  } else{
+    return 'null'
   }
-  return loved.join(',');
+
 };
 
 exports.restaurantDataMaker = () => {

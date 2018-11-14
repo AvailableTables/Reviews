@@ -1,6 +1,10 @@
 ## MAC files ##
 .DS_Store
 
+## data CVS files ##
+*.csv
+*.icloud
+
 ## NPM ##
 npm
 npm-debug.log
@@ -26,6 +30,7 @@ client/dist/bundle.js
 
 Dockerfile
 config.js
+pgconfig.js
 
 # Node components
 package-lock.json
