@@ -1,0 +1,9 @@
+
+var zlib = require('zlib');
+
+// var compressed = "eJx9k8tu2zAQRX9lvOpGSfX0i6sUeSCpG6dNkKzH5NiaRiYNkrJhwB+fkey0CBp0IUISSemcO8M71GxjjeqqgQcMTmVZrjKVVWk+qrI8y8blROWqnGbTaprLmKkfe9A1N8aTBe3axtgvEUJEayDWBLULkUI4B1nXEIYIS9w6z5FArjXsMPTr1mTbQbeobsOi21zjliA68BRbb2FLfg/BOTtQD56+buSz8FQTRk/JjXMGls4DwiVGSh41WdbwzLRLnmmF9jBrjdvyK6pn9iu2jPCNUNdqMu7simJYVGWZD6syVaXqzPKT3S0YDg2/0tHGiAr5OIB56/+rsyDy5/BC8sLGTmPLgSNYEg8xILdpCF4wSnR2lcycxgZu7cqTYbIxHOYbsk+4kEWXbMmri9Y7jyrLhx1wOZpMsrzKh3k1kedyWghsIchpV46F2y+9fMYA2d9uf0LfoQAKk4TGJ/azo9gH8IANmkFHjk0DO5YhSvLCjgE3A/UPavLLrcWRdXKxlB9YKRE8ESYzqcSZ5VUd4ZqtOXxHzwHv1dw3Ul6nxn30ZTWcpEWVjuVOVb3JMfpUnRA+5L/xrOndYU1C8s7dTfT989d+jft39l1NffTn6nFDmmXfXGsM7GxyLdNd71xLEzGF5N7FPvcXyR1mHOLhjjz/VI+oPUqXxu5QjFQqtRiN8nFaZkWZVuJSCfWxEn/YPzkPJ4Ouf9bu8xJIhKahMICrrukXzuyPdTC0lNaN1MiJc2vpMdSvgCtkK1qtNaI7a62ukxsv56KX6p8PbxldSKY="
+
+let def = ''
+def += zlib.inflateSync(Buffer.from(compressed, 'base64'))
+let arr = def.split('|')
+console.log(arr)

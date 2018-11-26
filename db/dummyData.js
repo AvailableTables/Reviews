@@ -274,21 +274,20 @@ const randomDate = (start, end) => {
 const reviewTextMaker = () => {
   return `${randomize(who)} ${randomize(opinion)} ${randomize(place)}${randomize(punctuation)} ${randomize(pronoun)} ${randomize(adjective)} was the ${randomize(food)}${randomize(punctuation)} ${randomize(who)} ${randomize(what)} ${randomize(eatAgain)} ${randomize(when)}${randomize(punctuation)}`;
 };
-//noiseLevel  isRecommended; recommendFor
+
 exports.reviewDataMaker = () => {
+  var stringified =  randomizer(5) + ':'+randomizer(5) + ':'+randomizer(5) + ':'+randomize([1, 2, 3]) + ':'+randomize([1, 2]) + ':'+randomize([0, 1]);
+
   return {
-    overallRating: randomizer(5),
-    foodRating: randomizer(5),
-    serviceRating: randomizer(5),
-    ambienceRating: randomizer(5),
-    valueRating: randomizer(5),
-    noiseLevel: randomize([1, 2, 3]),
-    isRecommended: randomize([0, 1]),
-    reviewText: reviewTextMaker(),
-    dinedDate: randomDate(new Date(2010, 0, 1), new Date()).valueOf(),
+   
     restaurantId: randomizer(10000000),
-    userId: randomizer(1000000),
+    userId: randomizer(20000000),
+    dineddate: randomDate(new Date(2010, 0, 1), new Date()).valueOf(),
+    overallrating: randomizer(5),
+    stringified: stringified,
+    reviewText: reviewTextMaker(),
     recommendedFor: recommendedForMaker()
+
   };
 };
 
@@ -347,3 +346,33 @@ exports.restaurantDataMaker = () => {
     lovedFor: lovedForMaker()
   };
 };
+
+
+exports.redisReviewData = () => {
+  if (Math.ceil(Math.random() * 5) > 1) {
+    var first = randomize(firstNames);
+    if (Math.ceil(Math.random() * 3) > 1) {
+      var last = randomize(lastNames);
+    } else {
+      var last = '';
+    }
+  } else {
+    var first = 'Open';
+    var last = 'Table Diner';
+  }
+  var stringified =  randomizer(5) + ':'+randomizer(5) + ':'+randomizer(5) + ':'+randomize([1, 2, 3]) + ':'+randomize([1, 2]) + ':'+randomize([0, 1]);
+
+  return {
+    username: first + last,
+    hometown: randomize(cities),
+    numOfReviews: Math.ceil(Math.random() * 150),
+    vip: Math.floor(Math.random() * 2),
+    dineddate: randomDate(new Date(2010, 0, 1), new Date()).valueOf(),
+    overallrating: randomizer(5),
+    stringified: stringified,
+    reviewText: reviewTextMaker(),
+    recommendedFor: recommendedForMaker()
+
+  };
+
+}

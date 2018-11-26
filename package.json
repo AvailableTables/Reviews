@@ -11,9 +11,14 @@
   "scripts": {
     "react-dev": "webpack -d --env.SC_ATTR=reviews --watch",
     "server-dev": "nodemon server/index.js",
-    "seed": "mysql -u root < ./db/reviewsSchema.sql && node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js",
-    "pgseed": "psql -U  postgres -f ./db/pg/testsch.sql",
+    "pgschema": "psql -U  lotter -f ./db/pg/pgschema.sql",
+    "pgdummydata": "node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js",
+    "pgseed": "node ./db/pg/index.js",
+    "pgtables": "node db/pg/alterTables.js",
     "test": "jest ./spec/test.js",
+    "redis-dummy":  "node ./db/redis/buildRestaurantData.js && node ./db/redis/revComp.js",
+    "redis-populate-rest": "cat redisRest.txt | redis-cli --pipe",
+    "redis-populate-rev": "cat redisRevComp.txt | redis-cli --pipe",
     "seed-aws": "mysql -h tableopen-reviews-db-free.ctqqauvpyeqz.us-east-1.rds.amazonaws.com -P 3306 -u mjones61692 -p < ./db/reviewsSchema.sql && node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js"
   },
   "repository": {
@@ -41,13 +46,23 @@
     "compression": "^1.7.3",
     "csv-write-stream": "^2.0.0",
     "express": "^4.15.0",
+    "express-handlebars": "^3.0.0",
+    "gzip": "^0.1.0",
+    "ioredis": "^4.2.0",
     "jest": "^23.6.0",
+    "lzutf8": "^0.5.5",
     "mysql": "^2.15.0",
+    "newrelic": "^4.11.0",
+    "nodemon": "^1.18.6",
     "pg": "^7.6.1",
+    "pg-copy-streams": "^1.2.0",
     "puppeteer": "^1.9.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "redis": "^2.8.0",
+    "redis-streams": "^1.1.0",
     "sequelize": "^4.41.1",
-    "styled-components": "^4.0.2"
+    "styled-components": "^4.0.2",
+    "zlib": "^1.0.5"
   }
 }
