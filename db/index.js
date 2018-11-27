@@ -1,7 +1,7 @@
 
-const {Client} = require('pg')
+const {Pool} = require('pg')
 
-module.exports =  new Client({
+module.exports =  new Pool({
   user:'lotter',  
   database: 'reviewsdb'
 })

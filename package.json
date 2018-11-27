@@ -16,6 +16,7 @@
     "pgseed": "node ./db/pg/index.js",
     "pgtables": "node db/pg/alterTables.js",
     "test": "jest ./spec/test.js",
+    "fireArtillery": "artillery run spec/newrelic/load-test.yml",
     "redis-dummy":  "node ./db/redis/buildRestaurantData.js && node ./db/redis/revComp.js",
     "redis-populate-rest": "cat redisRest.txt | redis-cli --pipe",
     "redis-populate-rev": "cat redisRevComp.txt | redis-cli --pipe",

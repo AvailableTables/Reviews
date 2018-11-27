@@ -8,16 +8,10 @@ module.exports = {
     return `${restaurant.location};${restaurant.lovedFor}`;
   },
   addReview: review => {
-    return `${review.userId};${review.restaurantId};${review.dineddate};${
-      review.overallrating
-    };${review.stringified};${review.reviewText};${review.recommendedFor}`;
+    return `${review.userId};${review.restaurantId};${review.dineddate};${review.overallrating};${review.stringified};${review.reviewText};${review.recommendedFor}`;
   },
   redisReview: info => {
-    var str = `${info.username};${info.hometown};${info.numOfReviews};${
-      info.vip
-    };${info.dineddate};${info.overallrating};${info.stringified};${
-      info.reviewText
-    };${info.recommendedFor}`;
+    var str = `${info.username};${info.hometown};${info.numOfReviews};${info.vip};${info.dineddate};${info.overallrating};${info.stringified};${info.reviewText};${info.recommendedFor}`;
 
     return str;
   },
@@ -40,8 +34,9 @@ module.exports = {
     client.query(sorter[choice], [id], (err, results) => {
       if (err) {
         console.log(err);
+
       } else {
-        callback(results);
+        callback(results, err);
       }
     });
   }

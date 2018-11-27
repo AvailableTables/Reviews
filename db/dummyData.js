@@ -276,6 +276,8 @@ const reviewTextMaker = () => {
 };
 
 exports.reviewDataMaker = () => {
+//var batch = 'foodRating;serviceRating;ambienceRating;valueRating;noiseLevel;isRecommended';
+//stringified=  foodRating, serviceRating, ambienceRating, noiseLevel, valueRating, isRecommended
   var stringified =  randomizer(5) + ':'+randomizer(5) + ':'+randomizer(5) + ':'+randomize([1, 2, 3]) + ':'+randomize([1, 2]) + ':'+randomize([0, 1]);
 
   return {

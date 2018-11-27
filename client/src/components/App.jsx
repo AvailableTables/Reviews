@@ -46,7 +46,9 @@ class App extends React.Component {
   }
 
   getReviews(id, sort) {
+    console.log(id)
     axios.get('/API/Reviews/reviews/all', {params: {id: id, choice: sort}})
+
       .then(({data}) => {
         let len = data.length;
         let overallSum = 0;
@@ -67,19 +69,19 @@ class App extends React.Component {
           sum: 0
         };
         data.forEach((review) => {
-          overallSum += review.overallRating;
-          overallCount[review.overallRating]++;
-          otherSums[0] += review.foodRating;
-          otherSums[1] += review.serviceRating;
-          otherSums[2] += review.ambienceRating;
-          otherSums[3] += review.valueRating;
-          if (review.noiseLevel !== null) {
+          overallSum += review.overallrating;
+          overallCount[review.overallrating]++;
+          otherSums[0] += review.foodrating;
+          otherSums[1] += review.servicerating;
+          otherSums[2] += review.ambiencerating;
+          otherSums[3] += review.valuerating;
+          if (review.noiselevel !== null) {
             noise.count++;
-            noise.sum += review.noiseLevel;
+            noise.sum += review.noiselevel;
           }
-          if (review.isRecommended !== null) {
+          if (review.isrecommended !== null) {
             recommend.count++;
-            recommend.sum += review.isRecommended;
+            recommend.sum += review.isrecommended;
           }
         });
         let noiseLevels = {
@@ -99,7 +101,7 @@ class App extends React.Component {
         }
         let overallRating = Math.round((overallSum / len) * 10) / 10;
         let recommendPercent = Math.round((recommend.sum / recommend.count) * 100);
-
+        console.log(data)
         this.setState({
           data: data,
           overallRating: overallRating,

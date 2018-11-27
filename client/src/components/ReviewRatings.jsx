@@ -110,7 +110,7 @@ class ReviewRatings extends React.Component {
 
   starArray() {
     let array = [];
-    let rating = this.props.review.overallRating;
+    let rating = this.props.review.overallrating;
     for (let x = 0; x < 5; x++) {
       if (rating >= 1) {
         array.push(<FullStar key={x}></FullStar>);
@@ -123,7 +123,7 @@ class ReviewRatings extends React.Component {
   }
 
   getDate() {
-    let dateSecs = this.props.review.dinedDate;
+    let dateSecs = this.props.review.dineddate;
     let diff = new Date().valueOf() - dateSecs;
     if (diff < 24 * 60 * 60 * 1000) {
       let hours = Math.round(diff / 1000 / 60 / 60);
@@ -140,7 +140,7 @@ class ReviewRatings extends React.Component {
         return `Dined ${days} days ago`;
       }
     } else {
-      let date = new Date(this.props.review.dinedDate);
+      let date = new Date(this.props.review.dineddate);
       return `Dined on ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
     }
   }
@@ -148,7 +148,7 @@ class ReviewRatings extends React.Component {
   getOtherRatings() {
     let array = [];
     const names = ['Overall', 'Food', 'Service', 'Ambience'];
-    const values = [this.props.review.overallRating, this.props.review.foodRating, this.props.review.serviceRating, this.props.review.ambienceRating];
+    const values = [this.props.review.overallrating, this.props.review.foodrating, this.props.review.servicerating, this.props.review.ambiencerating];
     names.forEach((name, index) => {
       if (index === 3) {
         array.push(
