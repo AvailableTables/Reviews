@@ -1,4 +1,4 @@
-const client = require('../../db/index.js');
+const client = require('../../db/pg/index.js');
 
 module.exports = {
   addUser: user => {
@@ -41,3 +41,11 @@ module.exports = {
     });
   }
 };
+
+
+/*
+select * from users
+inner join reviews on reviews.userId=users.id 
+inner join restaurants on reviews.restaurantId=restaurants.id
+where restaurants.id=500 order by reviews.dinedDate DESC;
+*/

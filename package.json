@@ -3,7 +3,7 @@
   "version": "",
   "description": "Reviews component for TableOpen project, which is replicating OpenTable's restaurant web page.",
   "main": "index.js",
-  "author": "MLJ",
+  "author": "LO",
   "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
@@ -12,21 +12,21 @@
     "react-dev": "webpack -d --env.SC_ATTR=reviews --watch",
     "server-dev": "nodemon server/index.js",
     "pgschema": "psql -U  lotter -f ./db/pg/pgschema.sql",
-    "pgdummydata": "node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js",
-    "pgseed": "node ./db/pg/index.js",
-    "pgtables": "node db/pg/alterTables.js",
+    "pgdummydata": "node ./db/pg/buildUserData.js && node ./db/pg/buildRestaurantData.js && node ./db/pg/buildReviewsData.js",
+    "pgseed": "node ./db/pg/populatepg.js",
+    "pgtables": "node ./db/pg/alterTables.js",
     "test": "jest ./spec/test.js",
     "fireArtillery": "artillery run spec/newrelic/load-test.yml",
-    "redis-dummy":  "node ./db/redis/buildRestaurantData.js && node ./db/redis/revComp.js",
+    "redis-dummy": "node ./db/redis/buildRestaurantData.js && node ./db/redis/revComp.js",
     "redis-populate-rest": "cat redisRest.txt | redis-cli --pipe",
     "redis-populate-rev": "cat redisRevComp.txt | redis-cli --pipe",
-    "seed-aws": "mysql -h tableopen-reviews-db-free.ctqqauvpyeqz.us-east-1.rds.amazonaws.com -P 3306 -u mjones61692 -p < ./db/reviewsSchema.sql && node ./db/buildUserData.js && node ./db/buildRestaurantData.js && node ./db/buildReviewsData.js"
+    "seed-aws": "mysql -h tableopen-reviews-db-free.ctqqauvpyeqz.us-east-1.rds.amazonaws.com -P 3306 -u mjones61692 -p < ./db/pg/reviewsSchema.sql && node ./db/pg/buildUserData.js && node ./db/pg/buildRestaurantData.js && node ./db/pg/buildReviewsData.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hrnyc18-tableOpen/Reviews.git"
+    "url": "git+https://github.com/AvailableTables/Reviews"
   },
-  "homepage": "https://github.com/hrnyc18-tableOpen/Reviews#README",
+  "homepage": "https://github.com/AvailableTables/Reviews#README",
   "devDependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.23.3",
@@ -52,6 +52,7 @@
     "ioredis": "^4.2.0",
     "jest": "^23.6.0",
     "lzutf8": "^0.5.5",
+    "morgan": "^1.9.1",
     "mysql": "^2.15.0",
     "newrelic": "^4.11.0",
     "nodemon": "^1.18.6",

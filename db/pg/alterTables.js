@@ -27,7 +27,8 @@ client
     console.log(`test query ${q} \n ${measureTime(t0, t1)}`);
     t0 = recordTime();
     return client.query('CREATE index ON reviews (restaurantid)');
-  })
+  })  //CREATE INDEX reviews_restaurantid_idx ON reviews USING HASH(restaurantid);
+  CREATE INDEX  ON reviews USING HASH(restaurantid);
   //client.query('CREATE index ON reviews (restaurantid)')
   .then(() => {
     t1 = recordTime();

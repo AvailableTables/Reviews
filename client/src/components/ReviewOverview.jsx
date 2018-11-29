@@ -115,7 +115,7 @@ class ReviewOverview extends React.Component {
           review={this.props.review}
         ></ReviewRatings>
         <ReviewTextWrap>
-          <ReviewText>{this.props.review.reviewText}</ReviewText>
+          <ReviewText>{this.props.review.reviewtext}</ReviewText>
         </ReviewTextWrap>
         <Spacer></Spacer>
         <ReportHelpfulWrap>

@@ -1,7 +1,7 @@
 
 
-const buildData = require('./dummyData.js');
-const model = require('../server/models/reviewModel.js');
+const buildData = require('../dummyData.js');
+const model = require('../../server/models/reviewModel.js');
 
 var fs = require('fs');
 

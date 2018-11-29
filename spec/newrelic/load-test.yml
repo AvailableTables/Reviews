@@ -1,14 +1,14 @@
 config:
   target: 'http://localhost:3020'
   phases:
-    - duration: 1800
-      arrivalRate: 200
+    - duration: 60
+      arrivalRate: 50
   processor: './randomID.js'
 scenarios:
   - flow:
-    - function: "randomID"
-    - get:
-        url: "/restaurants/{{ id }}"
-    - get:
-        url: "/API/Reviews/reviews/all?{{ id }}"
-
+    - loop:
+        - function: "randomID"
+        - get:
+            url: "/API/Reviews/reviews/all?{{ id }}"
+      count: 10
+  

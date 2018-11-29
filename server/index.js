@@ -4,14 +4,15 @@ const parser = require('body-parser');
 const path = require('path');
 const router = require('./routes/routes.js');
 const compression = require('compression');
+const morgan = require('morgan');
 
 const app = express();
-const client = require('../db/index.js');
+const client = require('../db/pg/index.js');
 
 
 client.connect();
 
-
+// app.use(morgan('dev'));
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 

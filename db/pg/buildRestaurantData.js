@@ -1,6 +1,5 @@
-const buildData = require('./dummyData.js');
-const model = require('../server/models/reviewModel.js');
-const db = require('./index.js');
+const buildData = require('../dummyData.js');
+const model = require('../../server/models/reviewModel.js');
 const fs = require('fs')
 var t0 = Math.round((new Date().getTime())/1000);
 var t =  Math.round((new Date().getTime())/1000);
