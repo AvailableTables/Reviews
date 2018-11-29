@@ -21,19 +21,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
-      restaurantId: '',
-      restaurantLocation: '',
-      lovedFor: '',
-      overallRating: null,
-      overallRatings: [0, 0, 0, 0, 0],
-      overallNums: ['5', '4', '3', '2', '1'],
-      otherRatings: [],
-      ratingNames: ['Food', 'Service', 'Ambience', 'Value'],
-      ambienceRating: undefined,
-      valueRating: undefined,
-      noiseLevel: '',
-      recommend: undefined,
+      data: [],                 //
+      restaurantId: '',           //
+      restaurantLocation: '',       //
+      lovedFor: '',                       //
+      overallRating: null,                      //
+      overallRatings: [0, 0, 0, 0, 0],                      //
+      overallNums: ['5', '4', '3', '2', '1'],                       //
+      otherRatings: [],                                                   //
+      ratingNames: ['Food', 'Service', 'Ambience', 'Value'],              //  
+      ambienceRating: undefined,                                  //
+      valueRating: undefined,                       //
+      noiseLevel: '',                                     //
+      recommend: undefined,                                 //
       currentPage: 1,
       pages: [],
       currentReviews: [],
