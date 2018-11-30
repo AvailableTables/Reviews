@@ -14,7 +14,16 @@ const model = require('../models/reviewModel.js');
 // var t0;
 // var t1;
 
-
+let getPages = (reviews) =>{
+  let len = reviews.length;
+  let i = 1;
+  let array = [];
+  while (len > 0) {
+    array.push(i++);
+    len -= 50;
+  }
+  return array;
+}
 
 exports.getAllReviews = (req, res) => {
   //t0 = recordTime();
@@ -41,8 +50,74 @@ exports.getAllReviews = (req, res) => {
       rest.dineddate *= 1;
     });
     // console.log('RESULT ROWS', results.rows)
-    res.send(data)
+    let len = data.length;
+      let overallSum = 0;
+      let overallCount = {
+        5: 0,
+        4: 0,
+        3: 0,
+        2: 0,
+        1: 0
+      };
+      let otherSums = [0, 0, 0, 0];
+      let noise = {
+        count: 0,
+        sum: 0
+      };
+      let recommend = {
+        count: 0,
+        sum: 0
+      };
+      data.forEach((review) => {
+        overallSum += review.overallrating;
+        overallCount[review.overallrating]++;
+        otherSums[0] += review.foodrating;
+        otherSums[1] += review.servicerating;
+        otherSums[2] += review.ambiencerating;
+        otherSums[3] += review.valuerating;
+        if (review.noiselevel !== null) {
+          noise.count++;
+          noise.sum += review.noiselevel;
+        }
+        if (review.isrecommended !== null) {
+          recommend.count++;
+          recommend.sum += review.isrecommended;
+        }
+      });
+      let noiseLevels = {
+        1: 'Quiet',
+        2: 'Moderate',
+        3: 'Energetic'
+      };
+      let noiseLevel = noiseLevels[Math.round(noise.sum / noise.count)];
+      
+      let overallRatings = [];
+      for (let x = 0; x < 5; x++) {
+        overallRatings.push(Math.round(overallCount[5 - x] / len * 100));
+      }
+      let otherRatings = [];
+      for (let x = 0; x < 4; x++) {
+        otherRatings.push((Math.round((otherSums[x] / len) * 10) / 10).toFixed(1));
+      }
+      let overallRating = Math.round((overallSum / len) * 10) / 10;
+      let recommendPercent = Math.round((recommend.sum / recommend.count) * 100);
+      console.log(data)
+ 
+      let response = {
+        data: data,
+        overallRating: overallRating,
+        overallRatings: overallRatings,
+        otherRatings: otherRatings,
+        noiseLevel: noiseLevel,
+        recommend: recommendPercent,
+        pages: getPages(data),
+        restaurantLocation: data[0].location,
+        lovedFor: data[0].lovedFor
+      };
+    
+    res.send(response)
     //res.send(JSON.parse(JSON.stringify(results)).rows);
     //console.log(measureSecs(t0, t1))
   });
+
 };

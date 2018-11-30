@@ -2,7 +2,7 @@ var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client/src');
 var DIST_DIR = path.join(__dirname, '/client/dist');
 
-const env = {
+const client = {
 
     entry: `${SRC_DIR}/index.jsx`,
     output: {
@@ -29,7 +29,7 @@ const env = {
 };
 
 
-const cli = {
+const server = {
 
     entry: `${SRC_DIR}/server.jsx`,
     target: 'node',

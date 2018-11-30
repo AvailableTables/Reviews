@@ -17,25 +17,26 @@ const ReviewsBody = styled.div`
   display: block;
 `;
 
+
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],                 //
-      restaurantId: '',           //
-      restaurantLocation: '',       //
-      lovedFor: '',                       //
-      overallRating: null,                      //
-      overallRatings: [0, 0, 0, 0, 0],                      //
-      overallNums: ['5', '4', '3', '2', '1'],                       //
-      otherRatings: [],                                                   //
-      ratingNames: ['Food', 'Service', 'Ambience', 'Value'],              //  
-      ambienceRating: undefined,                                  //
-      valueRating: undefined,                       //
-      noiseLevel: '',                                     //
-      recommend: undefined,                                 //
+      data: props.listing.data || [],                 
+      restaurantLocation: props.listing.restaurantLocation || '',       
+      lovedFor: props.listing.lovedFor || '',                       
+      overallRating: props.listing.overallRating || null,                      
+      overallRatings: props.listing.overallRatings || [0, 0, 0, 0, 0],                      
+      otherRatings: props.listing.otherRatings || [],                                                   
+      ambienceRating: props.listing.ambienceRating || undefined,                                  
+      noiseLevel: props.listing.noiseLevel || '',                                     
+      recommend: props.listing.recommend || undefined,                                 
+      pages: props.listing.pages ||  [],
+      overallNums: ['5', '4', '3', '2', '1'],                       
+      ratingNames: ['Food', 'Service', 'Ambience', 'Value'],              
       currentPage: 1,
-      pages: [],
       currentReviews: [],
       currentChoice: 'Newest'
     };
@@ -107,7 +108,6 @@ class App extends React.Component {
           overallRating: overallRating,
           overallRatings: overallRatings,
           otherRatings: otherRatings,
-          ratingNames: ['Food', 'Service', 'Ambience', 'Value'],
           noiseLevel: noiseLevel,
           recommend: recommendPercent,
           pages: this.getPages(data),
