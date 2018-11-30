@@ -4,10 +4,11 @@ var DIST_DIR = path.join(__dirname, '/client/dist');
 
 const client = {
 
-    entry: `${SRC_DIR}/index.jsx`,
+    entry: `${SRC_DIR}/client.jsx`,
     output: {
-      filename: 'bundle.js',
-      path: DIST_DIR
+      filename: 'bundle-client.js',
+      path: DIST_DIR,
+      publicPath: '/'
     },
     module: {
       loaders: [
@@ -18,10 +19,6 @@ const client = {
           query: {
             presets: ['react', 'es2015']
           }
-        },
-        {
-          test: /\.js?/,
-          loader: 'babel-loader'
         }
       ]
     }
@@ -34,8 +31,9 @@ const server = {
     entry: `${SRC_DIR}/server.jsx`,
     target: 'node',
     output: {
-      filename: 'bundle.js',
+      filename: 'bundle-server.js',
       path: DIST_DIR,
+      publicPath: '/',
       libraryTarget: 'commonjs2'
     },
     module: {
@@ -50,7 +48,11 @@ const server = {
         },
         {
           test: /\.js?/,
-          loader: 'babel-loader'
+          include: SRC_DIR,
+          loader: 'babel-loader',
+          query: {
+            presets: ['react', 'es2015']
+          }
         }
       ]
     }

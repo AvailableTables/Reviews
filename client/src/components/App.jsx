@@ -37,7 +37,7 @@ class App extends React.Component {
       overallNums: ['5', '4', '3', '2', '1'],                       
       ratingNames: ['Food', 'Service', 'Ambience', 'Value'],              
       currentPage: 1,
-      currentReviews: [],
+      currentReviews: props.listing.data.slice(0, 50)||[],
       currentChoice: 'Newest'
     };
     this.getReviews = this.getReviews.bind(this);
@@ -102,7 +102,7 @@ class App extends React.Component {
         }
         let overallRating = Math.round((overallSum / len) * 10) / 10;
         let recommendPercent = Math.round((recommend.sum / recommend.count) * 100);
-        console.log(data)
+        // console.log(data, "this err")
         this.setState({
           data: data,
           overallRating: overallRating,

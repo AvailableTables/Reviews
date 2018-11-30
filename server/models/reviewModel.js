@@ -31,9 +31,6 @@ module.exports = {
         where restaurants.id=$1 order by reviews.overallRating DESC`
     };
 
-
-    
-
     client.query(sorter[choice], [id], (err, results) => {
       if (err) {
         console.log(err);
