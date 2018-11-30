@@ -31,10 +31,14 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 client/dist/bundle.js
+bundle/bundle-client.js
+bundle/bundle-server.js
 
 Dockerfile
 config.js
 pgconfig.js
+
+
 
 # Node components
 package-lock.json

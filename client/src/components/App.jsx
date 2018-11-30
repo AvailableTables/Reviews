@@ -37,7 +37,7 @@ class App extends React.Component {
       overallNums: ['5', '4', '3', '2', '1'],                       
       ratingNames: ['Food', 'Service', 'Ambience', 'Value'],              
       currentPage: 1,
-      currentReviews: props.listing.data.slice(0, 50)||[],
+      currentReviews: props.listing.data.slice(0, 50),
       currentChoice: 'Newest'
     };
     this.getReviews = this.getReviews.bind(this);
@@ -47,7 +47,7 @@ class App extends React.Component {
   }
 
   getReviews(id, sort) {
-    console.log(id)
+    console.log(id, this.state.Choice)
     axios.get('/API/Reviews/reviews/all', {params: {id: id, choice: sort}})
 
       .then(({data}) => {
@@ -120,6 +120,7 @@ class App extends React.Component {
   
   changeChoice(choice) {
     let restaurantId = Number(window.location.pathname.slice(13)).toString();
+    console.log('change')
     this.getReviews(restaurantId, choice);
     this.setState({
       currentChoice: choice
