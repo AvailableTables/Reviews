@@ -1,4 +1,4 @@
-const client = require('../../db/pg/index.js');
+const client = require('../../db/pg/rdspool.js');
 
 module.exports = {
   addUser: user => {
