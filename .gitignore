@@ -4,6 +4,10 @@
 ## data CVS files ##
 *.csv
 *.icloud
+*.pem
+rds.js
+rdspool.js
+
 
 ## NPM ##
 npm

@@ -5,7 +5,7 @@ const model = require('../../server/models/reviewModel.js');
 
 var fs = require('fs');
 
-const total = 25000000;
+const total = 40000000;
 
 const bites = 100;
 var mil = 0;

@@ -12,6 +12,7 @@
     "react-dev": "webpack -d --env.SC_ATTR=reviews --watch",
     "server-dev": "nodemon server/index.js",
     "pgschema": "psql -U  lotter -f ./db/pg/pgschema.sql",
+    "pgschemaAWS": "psql -h reviewpg11.ci7ej4esfgf3.us-east-2.rds-preview.amazonaws.com -U AvailableTable reviewsdb -f ./db/pg/pgschema.sql",
     "pgdummydata": "node ./db/pg/buildUserData.js && node ./db/pg/buildRestaurantData.js && node ./db/pg/buildReviewsData.js",
     "pgseed": "node ./db/pg/populatepg.js",
     "pgtables": "node ./db/pg/alterTables.js",

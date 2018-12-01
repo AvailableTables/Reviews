@@ -1,6 +1,8 @@
 const fs = require('fs');
 const { Client } = require('pg');
 var copyFrom = require('pg-copy-streams').from;
+const client = require('./rds.js')
+
 
 const tables = [
   ['restaurants', 'id, location, lovedfor'],
@@ -20,10 +22,10 @@ var t = Math.round(new Date().getTime() / 1000);
 \COPY reviews(id, userId, restaurantId, overallRating, foodRating, serviceRating, ambienceRating, valueRating, noiseLevel, dinedDate, reviewText, isRecommended, recommendFor) FROM 'reviews.csv' DELIMITER ';' CSV HEADER;
 */
 
-const client = new Client({
-  user: 'lotter',
-  database: 'reviewsdb'
-});
+// const client = new Client({
+//   user: 'lotter',
+//   database: 'reviewsdb'
+// });
 
 const loadData = (callback, table) => {
   console.log('populating' + tables[i]);

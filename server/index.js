@@ -8,7 +8,7 @@ const morgan = require('morgan');
 const controller = require('./controllers/controller.js').getAllReviews;
 
 const app = express();
-const client = require('../db/pg/index.js');
+const client = require('../db/pg/rdspool.js');
 console.log(controller)
 
 
@@ -24,12 +24,7 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
-
-
-
-
 app.get('/restaurants/:id', controller)
-
 
 app.get('/favicon.ico', (req, res) => {
   res.send();

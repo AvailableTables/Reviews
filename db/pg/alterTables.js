@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { Client } = require('pg');
+const client = require('./red.js');
 
 const recordTime = () => {
   return Math.round(new Date().getTime() / 1000);
@@ -11,10 +12,10 @@ const measureTime = (start, end) => {
 var t0 = recordTime();
 var t1 = recordTime();
 
-const client = new Client({
-  user: 'lotter',
-  database: 'reviewsdb'
-});
+// const client = new Client({
+//   user: 'lotter',
+//   database: 'reviewsdb'
+// });
 
 client.connect().then(() => {
   console.log('connected');
@@ -26,9 +27,9 @@ client
     t1 = recordTime();
     console.log(`test query ${q} \n ${measureTime(t0, t1)}`);
     t0 = recordTime();
-    return client.query('CREATE index ON reviews (restaurantid)');
+    return client.query('CREATE INDEX reviews_restaurantid_idx ON reviews USING HASH(restaurantid)');
   })  //CREATE INDEX reviews_restaurantid_idx ON reviews USING HASH(restaurantid);
-  CREATE INDEX  ON reviews USING HASH(restaurantid);
+  // CREATE INDEX  ON reviews (restaurantid);
   //client.query('CREATE index ON reviews (restaurantid)')
   .then(() => {
     t1 = recordTime();

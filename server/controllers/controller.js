@@ -117,29 +117,29 @@ exports.getAllReviews = (req, res) => {
   
         // console.log('this far', component)
         html = ReactDom.renderToString(component);
-       [html, JSON.stringify(reactData)];
-        res.send([html, JSON.stringify(reactData)])
-    //   res.send(`
-    //   <!doctype <!DOCTYPE html>
-    //   <html>
-    //   <head>
-    //     <meta charset="utf-8" />
-    //     <title>TableOpen - Reviews Component</title>
-    //   </head>
-    //   <body>
-    //     <div id="app">${html}</div>
-    //     <script crossorigin src="https://unpkg.com/react@16.6.3/umd/react.development.js"></script>
-    //     <script crossorigin src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.development.js"></script>
-    //     <script type="text/javascript" src="/bundle-client.js" > </script>
-    //     <script>
-    //       ReactDOM.hydrate(
-    //         React.createElement(Reviews, ${JSON.stringify(reactData)}),
-    //         document.getElementById('app')
-    //       );
-    //     </script>
-    //   </body>
-    //   </html>
-    // `);
+      //  [html, JSON.stringify(reactData)];
+      //   res.send([html, JSON.stringify(reactData)])
+      res.send(`
+      <!doctype <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>TableOpen - Reviews Component</title>
+      </head>
+      <body>
+        <div id="app">${html}</div>
+        <script crossorigin src="https://unpkg.com/react@16.6.3/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.development.js"></script>
+        <script type="text/javascript" src="/bundle-client.js" > </script>
+        <script>
+          ReactDOM.hydrate(
+            React.createElement(Reviews, ${JSON.stringify(reactData)}),
+            document.getElementById('app')
+          );
+        </script>
+      </body>
+      </html>
+    `);
   
       //res.send(JSON.parse(JSON.stringify(results)).rows);
       //console.log(measureSecs(t0, t1))
