@@ -5,8 +5,7 @@
 *.csv
 *.icloud
 *.pem
-rds.js
-rdspool.js
+
 
 
 ## NPM ##
