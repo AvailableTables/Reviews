@@ -1,4 +1,4 @@
-// const newRelic = require('newrelic');
+const newRelic = require('newrelic');
 const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
@@ -11,12 +11,12 @@ const application = require('../client/dist/bundle-server.js').default;
 
 const app = express();
 const client = require('../db/pg/rdspool.js');
-console.log(application, 'headers')
+app.use(compression());
 
 
 client.connect();
 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -33,7 +33,6 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 app.use('/API/Reviews', router);
-// app.use(compression);
 
 
 

@@ -47,75 +47,75 @@ class App extends React.Component {
   }
 
   getReviews(id, sort) {
-    console.log(id, this.state.Choice)
-    axios.get('/API/Reviews/reviews/all', {params: {id: id, choice: sort}})
+    //console.log(id, this.state.Choice)
+    // axios.get('/API/Reviews/reviews/all', {params: {id: id, choice: sort}})
 
-      .then(({data}) => {
-        let len = data.length;
-        let overallSum = 0;
-        let overallCount = {
-          5: 0,
-          4: 0,
-          3: 0,
-          2: 0,
-          1: 0
-        };
-        let otherSums = [0, 0, 0, 0];
-        let noise = {
-          count: 0,
-          sum: 0
-        };
-        let recommend = {
-          count: 0,
-          sum: 0
-        };
-        data.forEach((review) => {
-          overallSum += review.overallrating;
-          overallCount[review.overallrating]++;
-          otherSums[0] += review.foodrating;
-          otherSums[1] += review.servicerating;
-          otherSums[2] += review.ambiencerating;
-          otherSums[3] += review.valuerating;
-          if (review.noiselevel !== null) {
-            noise.count++;
-            noise.sum += review.noiselevel;
-          }
-          if (review.isrecommended !== null) {
-            recommend.count++;
-            recommend.sum += review.isrecommended;
-          }
-        });
-        let noiseLevels = {
-          1: 'Quiet',
-          2: 'Moderate',
-          3: 'Energetic'
-        };
-        let noiseLevel = noiseLevels[Math.round(noise.sum / noise.count)];
+    //   .then(({data}) => {
+    //     let len = data.length;
+    //     let overallSum = 0;
+    //     let overallCount = {
+    //       5: 0,
+    //       4: 0,
+    //       3: 0,
+    //       2: 0,
+    //       1: 0
+    //     };
+    //     let otherSums = [0, 0, 0, 0];
+    //     let noise = {
+    //       count: 0,
+    //       sum: 0
+    //     };
+    //     let recommend = {
+    //       count: 0,
+    //       sum: 0
+    //     };
+    //     data.forEach((review) => {
+    //       overallSum += review.overallrating;
+    //       overallCount[review.overallrating]++;
+    //       otherSums[0] += review.foodrating;
+    //       otherSums[1] += review.servicerating;
+    //       otherSums[2] += review.ambiencerating;
+    //       otherSums[3] += review.valuerating;
+    //       if (review.noiselevel !== null) {
+    //         noise.count++;
+    //         noise.sum += review.noiselevel;
+    //       }
+    //       if (review.isrecommended !== null) {
+    //         recommend.count++;
+    //         recommend.sum += review.isrecommended;
+    //       }
+    //     });
+    //     let noiseLevels = {
+    //       1: 'Quiet',
+    //       2: 'Moderate',
+    //       3: 'Energetic'
+    //     };
+    //     let noiseLevel = noiseLevels[Math.round(noise.sum / noise.count)];
         
-        let overallRatings = [];
-        for (let x = 0; x < 5; x++) {
-          overallRatings.push(Math.round(overallCount[5 - x] / len * 100));
-        }
-        let otherRatings = [];
-        for (let x = 0; x < 4; x++) {
-          otherRatings.push((Math.round((otherSums[x] / len) * 10) / 10).toFixed(1));
-        }
-        let overallRating = Math.round((overallSum / len) * 10) / 10;
-        let recommendPercent = Math.round((recommend.sum / recommend.count) * 100);
-        // console.log(data, "this err")
-        this.setState({
-          data: data,
-          overallRating: overallRating,
-          overallRatings: overallRatings,
-          otherRatings: otherRatings,
-          noiseLevel: noiseLevel,
-          recommend: recommendPercent,
-          pages: this.getPages(data),
-          currentReviews: data.slice(0, 50),
-          restaurantLocation: data[0].location,
-          lovedFor: data[0].lovedFor
-        });
-      });
+    //     let overallRatings = [];
+    //     for (let x = 0; x < 5; x++) {
+    //       overallRatings.push(Math.round(overallCount[5 - x] / len * 100));
+    //     }
+    //     let otherRatings = [];
+    //     for (let x = 0; x < 4; x++) {
+    //       otherRatings.push((Math.round((otherSums[x] / len) * 10) / 10).toFixed(1));
+    //     }
+    //     let overallRating = Math.round((overallSum / len) * 10) / 10;
+    //     let recommendPercent = Math.round((recommend.sum / recommend.count) * 100);
+    //     // console.log(data, "this err")
+    //     this.setState({
+    //       data: data,
+    //       overallRating: overallRating,
+    //       overallRatings: overallRatings,
+    //       otherRatings: otherRatings,
+    //       noiseLevel: noiseLevel,
+    //       recommend: recommendPercent,
+    //       pages: this.getPages(data),
+    //       currentReviews: data.slice(0, 50),
+    //       restaurantLocation: data[0].location,
+    //       lovedFor: data[0].lovedFor
+    //     });
+    //   });
   }
   
   changeChoice(choice) {

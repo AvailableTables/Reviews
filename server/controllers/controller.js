@@ -21,11 +21,13 @@ exports.getAllReviews = (req, res) => {
   const choice = req.params.choice || 'Newest';
   let html;
   
-  console.log('req',req.params.id)
+  //console.log('req',req.params.id)
 
   if(req.params.id){
 
     model.getAllReviews(req.params.id, choice, (results, err) => {
+
+      
       // console.log(JSON.parse(JSON.stringify(results)).rows, req.query.id)
       //t1 = recordTime();
       //var batch = 'foodRating;serviceRating;ambienceRating;valueRating;noiseLevel;isRecommended';
@@ -33,9 +35,24 @@ exports.getAllReviews = (req, res) => {
         res.status(501).send(err)
       }
       data = JSON.parse(JSON.stringify(results)).rows
-  
+
+      // if(!data[0]){
+      //   console.log('sending')
+      //   res.send()
+      //   return
+      // }
+
+      //console.log(req.params.id,  'ping')
       data.forEach(rest => {
-        let info = rest.stringified.split(':')
+        if(!rest.stringified){
+          var info = [0, 0, 0, 0, 0, 0]
+          //console.log('no info')  //1809218
+          
+        } else{
+          //console.log('some info')  //1809218
+
+          var info = rest.stringified.split(':') 
+        }
         //foodRating, serviceRating, ambienceRating, noiseLevel, valueRating, isRecommended
         rest.foodrating  = info[0]*1;
         rest.servicerating  = info[1]*1;
@@ -112,7 +129,7 @@ exports.getAllReviews = (req, res) => {
         };
         //console.log('bundle', application)
 
-        console.log(application, 'application')
+        //console.log(application, 'application')
         let component = React.createElement(application, reactData);
   
         // console.log('this far', component)
