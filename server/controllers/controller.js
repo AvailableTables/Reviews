@@ -112,8 +112,8 @@ exports.getAllReviews = (req, res) => {
         };
         //console.log('bundle', application)
 
+        console.log(application, 'application')
         let component = React.createElement(application, reactData);
-        // console.log(component, 'component')
   
         // console.log('this far', component)
         html = ReactDom.renderToString(component);

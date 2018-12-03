@@ -6,10 +6,12 @@ const router = require('./routes/routes.js');
 const compression = require('compression');
 const morgan = require('morgan');
 const controller = require('./controllers/controller.js').getAllReviews;
+const application = require('../client/dist/bundle-server.js').default;
+
 
 const app = express();
 const client = require('../db/pg/rdspool.js');
-console.log(controller)
+console.log(application, 'headers')
 
 
 client.connect();
