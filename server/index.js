@@ -1,4 +1,4 @@
-const newRelic = require('newrelic');
+// const newRelic = require('newrelic');
 const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
@@ -16,7 +16,7 @@ app.use(compression());
 
 client.connect();
 
-//app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -39,46 +39,4 @@ app.use('/API/Reviews', router);
 app.listen(3020, () => {
   console.log('Listening on port 3020...');
 });
-
-
-
-
-// const model = require('./model.js');
-// const React = require('react');
-// const ReactDOMServer = require('react-dom/server');
-// const application = require('../client/dist/review-bundle-server.js').default;
-
-// const ssr = (id) => {
-//   let props;
-//   let html;
-
-//   return Promise.all([
-//     // 0: reviews
-//   model.getAllReviews(Number(id))
-//   .then((response) => {
-//     return response.rows;
-//   })
-//   .then((data) => {
-//     props = {
-//       reviews: data[0], 
-//       ratings: data[1], 
-//       search: [], 
-//       showSearch: false
-//     }
-//     props.reviews.forEach((review) => {
-//       review.review_date = review.review_date.toISOString();
-//     })
-//     props.ratings.forEach((rating) => {
-//       for (var category in rating) {
-//         rating[category] *= 1;
-//       }
-//     })
-//     let component = React.createElement(application, props);
-//     html = ReactDOMServer.renderToString(component);
-//     return [html, JSON.stringify(props)];
-//   })
-//   .catch((err) => { 
-//     console.error(err); 
-//   }) ])
-// }
 

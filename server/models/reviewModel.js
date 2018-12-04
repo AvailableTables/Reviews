@@ -1,5 +1,21 @@
 const client = require('../../db/pg/rdspool.js');
 
+const sorter = {
+  Newest: `select * from users
+    inner join reviews on reviews.userId=users.id 
+    inner join restaurants on reviews.restaurantId=restaurants.id
+    where restaurants.id=$1 order by reviews.dinedDate DESC`,
+  'Lowest+rating': `select * from users
+    inner join reviews on reviews.userId=users.id 
+    inner join restaurants on reviews.restaurantId=restaurants.id
+    where restaurants.id=$1 order by reviews.overallRating ASC`,
+  'Highest+rating': `select * from users
+    inner join reviews on reviews.userId=users.id 
+    inner join restaurants on reviews.restaurantId=restaurants.id
+    where restaurants.id=$1 order by reviews.overallRating DESC`
+};
+
+
 module.exports = {
   addUser: user => {
     return `${user.username};${user.hometown};${user.numOfReviews};${user.vip}`;
@@ -15,6 +31,7 @@ module.exports = {
 
     return str;
   },
+
   getAllReviews: (id, choice, callback) => {
     const sorter = {
       Newest: `select * from users
@@ -31,7 +48,7 @@ module.exports = {
         where restaurants.id=$1 order by reviews.overallRating DESC`
     };
  
-
+    console.log(sorter[choice], [id])
     client.query(sorter[choice], [id], (err, results) => {
       if (err) {
         console.log(err);
@@ -53,6 +70,42 @@ module.exports = {
         }
       }
     });
+  },
+  newOrder: (req, res)=>{
+
+    console.log('new order req', req)
+    let id = req.split('=')[1].split('&')[0];
+    let choice = req.split('=')[2]
+    
+    console.log(choice, sorter[choice])
+    
+
+    client.query(sorter[choice], [id], (err, results) => {
+      if (err) {
+        console.log(err);
+
+      } else {
+        data = JSON.parse(JSON.stringify(results)).rows
+
+        data.forEach(rest => {
+          let info = rest.stringified.split(':')
+          //foodRating, serviceRating, ambienceRating, noiseLevel, valueRating, isRecommended
+          rest.foodrating  = info[0]*1;
+          rest.servicerating  = info[1]*1;
+          rest.ambiencerating  = info[3]*1;
+          rest.noiselevel  = info[4]*1;
+          rest.valuerating  = info[2]*1;
+          rest.isrecommended  = info[5]*1;
+          rest.dineddate *= 1;
+        });
+        // console.log('RESULT ROWS', results.rows)
+        console.log(data)
+        res.send(data)
+      }
+    })
+
+
+
   }
 };
 
