@@ -28,7 +28,7 @@ exports.getAllReviews = (req, res) => {
   const choice = req.params.choice || 'Newest';
   let html;
   
-  console.log('req',req.url)
+  // console.log('req',req.url)
 
   if(req.params.id){
 

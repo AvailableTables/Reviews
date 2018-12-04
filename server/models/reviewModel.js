@@ -48,7 +48,7 @@ module.exports = {
         where restaurants.id=$1 order by reviews.overallRating DESC`
     };
  
-    console.log(sorter[choice], [id])
+    // console.log(sorter[choice], [id])
     client.query(sorter[choice], [id], (err, results) => {
       if (err) {
         console.log(err);
@@ -73,11 +73,11 @@ module.exports = {
   },
   newOrder: (req, res)=>{
 
-    console.log('new order req', req)
+    // console.log('new order req', req)
     let id = req.split('=')[1].split('&')[0];
     let choice = req.split('=')[2]
     
-    console.log(choice, sorter[choice])
+    // console.log(choice, sorter[choice])
     
 
     client.query(sorter[choice], [id], (err, results) => {
@@ -99,7 +99,7 @@ module.exports = {
           rest.dineddate *= 1;
         });
         // console.log('RESULT ROWS', results.rows)
-        console.log(data)
+        // console.log(data)
         res.send(data)
       }
     })
