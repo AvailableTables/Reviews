@@ -6,11 +6,9 @@ Legacy App: https://github.com/hrnyc18-tableOpen/Reviews
 > This project is a self-contained reviews component for TableOpen, a replica of Open Table's restaurant web page.
 
 ## Related Projects
-
-  - https://github.com/hrnyc18-tableOpen/Overview
-  - https://github.com/hrnyc18-tableOpen/Menus
-  - https://github.com/hrnyc18-tableOpen/Reservations
-  - https://github.com/hrnyc18-tableOpen/MattProxyServer
+  - https://github.com/AvailableTables/AT-Headers
+  - https://github.com/AvailableTables/Overview-1
+  - https://github.com/AvailableTables/Reviews_Proxy
 
 ## Table of Contents
 
