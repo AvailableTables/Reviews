@@ -1,5 +1,5 @@
-Legacy App: https://github.com/hrnyc18-tableOpen/Reviews
-
+Deployed instance of app can be found at :http://18.217.216.133:3020/restaurants/1000000
+Index can be varied from 1 to 10000000
 
 # Project Name
 
