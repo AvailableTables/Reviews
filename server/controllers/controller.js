@@ -24,43 +24,28 @@ exports.newOrder = (req, res) => {
 }
 
 exports.getAllReviews = (req, res) => {
-  //t0 = recordTime();
   const choice = req.params.choice || 'Newest';
   let html;
   
-  // console.log('req',req.url)
-
   if(req.params.id){
 
     model.getAllReviews(req.params.id, choice, (results, err) => {
 
       
-      // console.log(JSON.parse(JSON.stringify(results)).rows, req.query.id)
-      //t1 = recordTime();
-      //var batch = 'foodRating;serviceRating;ambienceRating;valueRating;noiseLevel;isRecommended';
       if(err) {
         res.status(501).send(err)
       }
       data = JSON.parse(JSON.stringify(results)).rows
 
-      // if(!data[0]){
-      //   console.log('sending')
-      //   res.send()
-      //   return
-      // }
-
-      //console.log(req.params.id,  'ping')
       data.forEach(rest => {
         if(!rest.stringified){
           var info = [0, 0, 0, 0, 0, 0]
-          //console.log('no info')  //1809218
           
         } else{
-          //console.log('some info')  //1809218
 
           var info = rest.stringified.split(':') 
         }
-        //foodRating, serviceRating, ambienceRating, noiseLevel, valueRating, isRecommended
+
         rest.foodrating  = info[0]*1;
         rest.servicerating  = info[1]*1;
         rest.ambiencerating  = info[3]*1;
@@ -69,8 +54,8 @@ exports.getAllReviews = (req, res) => {
         rest.isrecommended  = info[5]*1;
         rest.dineddate *= 1;
       });
-      // console.log('RESULT ROWS', results.rows)
-      let len = data.length;
+
+        let len = data.length;
         let overallSum = 0;
         let overallCount = {
           5: 0,
@@ -121,7 +106,6 @@ exports.getAllReviews = (req, res) => {
         }
         let overallRating = Math.round((overallSum / len) * 10) / 10;
         let recommendPercent = Math.round((recommend.sum / recommend.count) * 100);
-        // console.log('oioioi', data)
    
         let reactData = {
           data: data,
@@ -134,36 +118,36 @@ exports.getAllReviews = (req, res) => {
           restaurantLocation: data[0].location,
           lovedFor: data[0].lovedFor
         };
-        //console.log('bundle', application)
 
-        //console.log(application, 'application')
         let component = React.createElement(application, reactData);
   
-        // console.log('this far', component)
         html = ReactDom.renderToString(component);
-        [html, JSON.stringify(reactData)];
-        res.send([html, JSON.stringify(reactData)])
-    //   res.send(`
-    //   <!doctype <!DOCTYPE html>
-    //   <html>
-    //   <head>
-    //     <meta charset="utf-8" />
-    //     <title>TableOpen - Reviews Component</title>
-    //   </head>
-    //   <body>
-    //     <div id="app">${html}</div>
-    //     <script crossorigin src="https://unpkg.com/react@16.6.3/umd/react.development.js"></script>
-    //     <script crossorigin src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.development.js"></script>
-    //     <script type="text/javascript" src="/bundle-client.js" > </script>
-    //     <script>
-    //       ReactDOM.hydrate(
-    //         React.createElement(Reviews, ${JSON.stringify(reactData)}),
-    //         document.getElementById('app')
-    //       );
-    //     </script>
-    //   </body>
-    //   </html>
-    // `);
+        let response = {
+          proxyServer: [html, JSON.stringify(reactData)],
+          component: `
+          <!doctype <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8" />
+            <title>TableOpen - Reviews Component</title>
+          </head>
+          <body>
+            <div id="app">${html}</div>
+            <script crossorigin src="https://unpkg.com/react@16.6.3/umd/react.development.js"></script>
+            <script crossorigin src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.development.js"></script>
+            <script type="text/javascript" src="/bundle-client.js" > </script>
+            <script>
+              ReactDOM.hydrate(
+                React.createElement(Reviews, ${JSON.stringify(reactData)}),
+                document.getElementById('app')
+              );
+            </script>
+          </body>
+          </html>
+        `
+        }
+        //send response.proxyServer with proxy server, response.component for standalone component
+        res.send(response.component)
     });
   }
 

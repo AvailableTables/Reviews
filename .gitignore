@@ -5,7 +5,7 @@
 *.csv
 *.icloud
 *.pem
-
+*.pub
 
 
 ## NPM ##
